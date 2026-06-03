@@ -53,7 +53,7 @@ export function Footer() {
             </a>
             <a
               href="/resume.pdf"
-              download
+              download="Christian-Sales-Resume.pdf"
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               Resume

@@ -71,7 +71,7 @@ export function Navbar() {
         <div className="hidden items-center gap-2 md:flex">
           <a
             href="/resume.pdf"
-            download
+            download="Christian-Sales-Resume.pdf"
             aria-label="Download Christian Sales resume"
             className={cn(buttonVariants({ variant: "ghost", size: "icon-sm" }))}
           >
@@ -146,7 +146,7 @@ export function Navbar() {
               <div className="mt-4 flex items-center gap-2 border-t border-border pt-4">
                 <a
                   href="/resume.pdf"
-                  download
+                  download="Christian-Sales-Resume.pdf"
                   className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
                 >
                   <FileDown className="mr-2 size-4" />
