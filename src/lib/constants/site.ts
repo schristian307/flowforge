@@ -7,7 +7,7 @@ export const SITE = {
     "Independent developer focused on modern web development, automation, and business systems.",
   seoDescription:
     "Full-stack development, AI automation, workflow engineering, CRM systems, and technical SEO solutions.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.operatormode.dev",
 } as const;
 
 export const SEO_KEYWORDS = [
