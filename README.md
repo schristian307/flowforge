@@ -53,10 +53,6 @@ Scalable web applications designed around business workflows.
 
 Coming Soon
 
-## Screenshots
-
-(Add screenshots here)
-
 ## About FlowForge
 
 FlowForge focuses on building custom websites, automation systems, CRM solutions, and business tools that help organizations reduce manual work and scale efficiently.
