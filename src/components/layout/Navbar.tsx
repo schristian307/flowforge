@@ -72,7 +72,7 @@ export function Navbar() {
           <a
             href="/resume.pdf"
             download
-            aria-label="Download resume"
+            aria-label="Download Christian Sales resume"
             className={cn(buttonVariants({ variant: "ghost", size: "icon-sm" }))}
           >
             <FileDown className="size-4" />
@@ -99,7 +99,7 @@ export function Navbar() {
             href="#contact"
             className={cn(buttonVariants({ size: "sm" }))}
           >
-            Book a Consultation
+            Get In Touch
           </Link>
         </div>
 
@@ -157,7 +157,7 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className={cn(buttonVariants({ size: "sm" }), "flex-1")}
                 >
-                  Book a Consultation
+                  Get In Touch
                 </Link>
               </div>
             </div>

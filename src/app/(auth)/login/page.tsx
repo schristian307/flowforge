@@ -2,17 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createClient } from "@/lib/supabase/client";
+import { loginAdmin } from "@/actions/auth";
 import { SITE } from "@/lib/constants/site";
 
 export default function LoginPage() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,20 +24,12 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    const supabase = createClient();
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const result = await loginAdmin(email, password, redirect);
 
-    if (signInError) {
-      toast.error("Login failed", { description: signInError.message });
-      setIsLoading(false);
-      return;
+    if (result && !result.success) {
+      toast.error("Login failed", { description: result.error });
     }
 
-    router.push(redirect);
-    router.refresh();
     setIsLoading(false);
   }
 
@@ -51,7 +42,10 @@ export default function LoginPage() {
           </Link>
           <h1 className="mt-4 text-2xl font-semibold">Admin Login</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to access the dashboard
+            Sign in to access the dashboard at{" "}
+            <Link href="/dashboard" className="text-primary hover:underline">
+              /dashboard
+            </Link>
           </p>
           {error === "unauthorized" && (
             <p className="mt-2 text-sm text-destructive">

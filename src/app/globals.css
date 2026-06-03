@@ -49,7 +49,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* FlowForge portfolio — dark-first */
+/* Operator Mode portfolio — dark-first */
 :root {
   --background: #000000;
   --foreground: #ffffff;

@@ -1,4 +1,4 @@
--- FlowForge contacts table migration
+-- Operator Mode contacts table migration
 CREATE TABLE IF NOT EXISTS public.contacts (
   id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name       TEXT NOT NULL,

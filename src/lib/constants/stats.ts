@@ -15,7 +15,7 @@ export const PORTFOLIO_STATS = [
     suffix: "+",
   },
   {
-    label: "Client Satisfaction",
+    label: "Projects Delivered",
     value: 98,
     suffix: "%",
   },

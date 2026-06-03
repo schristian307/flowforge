@@ -8,21 +8,25 @@ export function AboutSection() {
     <SectionWrapper id="about">
       <SectionHeader
         label="About"
-        title="Building systems that work"
-        description="Independent developer specializing in full-stack applications, automation pipelines, and search optimization."
+        title="What I do"
+        description="Independent developer — full-stack applications, automation, and technical SEO."
       />
 
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div className="space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
           <p>
-            Focused on shipping practical software — custom web applications,
-            AI-powered automation workflows, CRM systems, and lead generation
-            pipelines that reduce manual work and scale with your business.
+            I build custom web applications, AI-powered automation workflows, and
+            CRM systems that replace manual work with reliable, measurable
+            processes. I develop lead generation pipelines and workflow systems
+            that capture, score, and route inquiries without spreadsheets or
+            copy-paste between tools.
           </p>
           <p>
-            From Next.js frontends to Supabase backends, n8n automations to
-            technical SEO — every project is built with modern tools, clean
-            architecture, and measurable outcomes.
+            I automate business operations with n8n, API integrations, and modern
+            backends — and I improve technical SEO so sites load fast, rank
+            well, and convert. From Next.js frontends to Supabase data layers,
+            every project is built with clean architecture and outcomes you can
+            track.
           </p>
         </div>
 

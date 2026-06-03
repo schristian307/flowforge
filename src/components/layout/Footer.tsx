@@ -16,7 +16,7 @@ export function Footer() {
           <div>
             <p className="text-lg font-semibold text-foreground">{SITE.name}</p>
             <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-              {SITE.subheading}
+              {SITE.footerDescription}
             </p>
           </div>
 

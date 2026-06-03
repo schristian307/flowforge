@@ -1,12 +1,13 @@
 export const SITE = {
-  name: "FlowForge",
+  name: "Operator Mode",
   tagline: "Build. Automate. Scale.",
   description:
-    "Custom software, AI automation, CRM systems, and SEO solutions engineered for growth.",
-  subheading:
-    "Custom websites, AI automations, CRM systems, and SEO solutions that help businesses operate more efficiently.",
+    "I design and build custom websites, automation workflows, CRM systems, and AI-powered solutions that help businesses operate more efficiently.",
+  footerDescription:
+    "Independent developer focused on modern web development, automation, and business systems.",
+  seoDescription:
+    "Full-stack development, AI automation, workflow engineering, CRM systems, and technical SEO solutions.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  email: "hello@flowforge.dev",
 } as const;
 
 export const SEO_KEYWORDS = [

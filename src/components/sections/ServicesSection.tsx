@@ -32,7 +32,7 @@ export function ServicesSection() {
       <SectionHeader
         label="Services"
         title="What I build"
-        description="End-to-end development and automation for businesses that need reliable, scalable systems."
+        description="I design and ship full-stack apps, automation pipelines, and search-optimized sites — built to run reliably at scale."
       />
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

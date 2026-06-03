@@ -4,25 +4,25 @@ import type { Metadata } from "next";
 export const siteMetadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
+    default: SITE.name,
     template: `%s | ${SITE.name}`,
   },
-  description: SITE.description,
+  description: SITE.seoDescription,
   keywords: [...SEO_KEYWORDS],
-  authors: [{ name: SITE.name }],
-  creator: SITE.name,
+  authors: [{ name: "Christian Sales" }],
+  creator: "Christian Sales",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} — ${SITE.tagline}`,
-    description: SITE.description,
+    title: SITE.name,
+    description: SITE.seoDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.tagline}`,
-    description: SITE.description,
+    title: SITE.name,
+    description: SITE.seoDescription,
   },
   robots: {
     index: true,
@@ -39,11 +39,12 @@ export function getStructuredData() {
         "@id": `${SITE.url}/#website`,
         name: SITE.name,
         url: SITE.url,
-        description: SITE.description,
+        description: SITE.seoDescription,
       },
       {
         "@type": "Person",
         "@id": `${SITE.url}/#person`,
+        name: "Christian Sales",
         jobTitle: "Full Stack Developer & Automation Engineer",
         url: SITE.url,
         knowsAbout: [
@@ -56,10 +57,6 @@ export function getStructuredData() {
           "SEO",
           "CRM Development",
         ],
-        worksFor: {
-          "@type": "Organization",
-          name: SITE.name,
-        },
       },
     ],
   };

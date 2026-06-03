@@ -55,7 +55,7 @@ export function HeroSection() {
               href="#contact"
               className={cn(buttonVariants({ size: "lg", variant: "outline" }))}
             >
-              Book a Consultation
+              Get In Touch
             </Link>
           </div>
         </motion.div>

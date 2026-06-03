@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 import { createServerClient } from "@supabase/ssr";
-import { isAdminEmail } from "@/lib/auth";
 import type { Database } from "@/types/database";
 
 export async function middleware(request: NextRequest) {
@@ -39,17 +38,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (!user.email || !isAdminEmail(user.email)) {
-    await supabase.auth.signOut();
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("error", "unauthorized");
-    return NextResponse.redirect(url);
-  }
+  // Admin email whitelist is checked in dashboard layout (Node.js runtime).
+  // Edge middleware cannot read non-NEXT_PUBLIC env vars like ADMIN_EMAILS.
 
   return response;
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard", "/dashboard/:path*"],
 };

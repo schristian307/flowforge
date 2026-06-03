@@ -51,7 +51,7 @@ export function ContactSection() {
     try {
       const result = await submitContact(data);
       if (result.success) {
-        toast.success("Consultation request received", {
+        toast.success("Message received", {
           description:
             "Thank you for reaching out. Expect a response within 1–2 business days.",
         });
@@ -74,7 +74,7 @@ export function ContactSection() {
     <SectionWrapper id="contact">
       <SectionHeader
         label="Contact"
-        title="Book a consultation"
+        title="Let's discuss your project."
         description="Share your project details and I'll respond with next steps within 1–2 business days."
       />
 
@@ -106,7 +106,7 @@ export function ContactSection() {
             <Input
               id="email"
               type="email"
-              placeholder="you@company.com"
+              placeholder="you@example.com"
               {...register("email")}
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? "email-error" : undefined}
@@ -213,7 +213,7 @@ export function ContactSection() {
           ) : (
             <>
               <Send className="mr-2 size-4" />
-              Send Inquiry
+              Send Message
             </>
           )}
         </Button>
