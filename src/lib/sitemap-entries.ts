@@ -1,5 +1,3 @@
-import { SITE } from "@/lib/constants/site";
-
 export type SitemapEntry = {
   url: string;
   lastModified: Date;
@@ -7,10 +5,10 @@ export type SitemapEntry = {
   priority: number;
 };
 
-export function getSitemapEntries(): SitemapEntry[] {
+export function getSitemapEntries(siteUrl: string): SitemapEntry[] {
   return [
     {
-      url: SITE.url,
+      url: siteUrl,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,

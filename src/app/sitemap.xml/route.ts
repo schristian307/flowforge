@@ -1,4 +1,7 @@
+import { resolveSiteUrl } from "@/lib/constants/site";
 import { getSitemapEntries } from "@/lib/sitemap-entries";
+
+export const dynamic = "force-dynamic";
 
 function escapeXml(value: string): string {
   return value
@@ -13,8 +16,9 @@ function formatLastModified(date: Date): string {
   return date.toISOString().split("T")[0] ?? date.toISOString();
 }
 
-export function GET() {
-  const entries = getSitemapEntries();
+export function GET(request: Request) {
+  const siteUrl = resolveSiteUrl(request);
+  const entries = getSitemapEntries(siteUrl);
 
   const urlNodes = entries
     .map(
