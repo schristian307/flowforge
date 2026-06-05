@@ -14,6 +14,10 @@ CREATE INDEX IF NOT EXISTS contacts_service_idx ON public.contacts (service);
 
 ALTER TABLE public.contacts ENABLE ROW LEVEL SECURITY;
 
+-- Table-level privileges (required alongside RLS policies)
+GRANT SELECT, INSERT ON public.contacts TO anon, authenticated;
+GRANT ALL ON public.contacts TO service_role;
+
 -- Drop existing policies if re-running
 DROP POLICY IF EXISTS "Allow anonymous insert" ON public.contacts;
 DROP POLICY IF EXISTS "Allow authenticated read" ON public.contacts;

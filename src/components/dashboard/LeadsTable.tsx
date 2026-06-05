@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { format, parseISO } from "date-fns";
-import { Search, Trash2 } from "lucide-react";
+import { Eye, Search, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -44,6 +44,7 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
   const [search, setSearch] = useState("");
   const [serviceFilter, setServiceFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("all");
+  const [selectedLead, setSelectedLead] = useState<Contact | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -163,7 +164,7 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
                 <TableHead>Budget</TableHead>
                 <TableHead>Score</TableHead>
                 <TableHead>Date</TableHead>
-                <TableHead className="w-[60px]" />
+                <TableHead className="w-[88px]" />
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -171,7 +172,11 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
                 const score = getBudgetScore(lead.budget);
                 const scoreLabel = getLeadScoreLabel(score);
                 return (
-                <TableRow key={lead.id}>
+                <TableRow
+                  key={lead.id}
+                  className="cursor-pointer"
+                  onClick={() => setSelectedLead(lead)}
+                >
                   <TableCell className="font-medium">{lead.name}</TableCell>
                   <TableCell>{lead.email}</TableCell>
                   <TableCell>{lead.service}</TableCell>
@@ -185,7 +190,6 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
                             ? "secondary"
                             : "outline"
                       }
-                      title={lead.message.slice(0, 120)}
                     >
                       {score}/5 · {scoreLabel}
                     </Badge>
@@ -194,14 +198,30 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
                     {format(parseISO(lead.created_at), "MMM d, yyyy")}
                   </TableCell>
                   <TableCell>
-                    <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      onClick={() => setDeleteId(lead.id)}
-                      aria-label={`Delete lead from ${lead.name}`}
-                    >
-                      <Trash2 className="size-4 text-destructive" />
-                    </Button>
+                    <div className="flex items-center justify-end gap-1">
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedLead(lead);
+                        }}
+                        aria-label={`View inquiry from ${lead.name}`}
+                      >
+                        <Eye className="size-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setDeleteId(lead.id);
+                        }}
+                        aria-label={`Delete lead from ${lead.name}`}
+                      >
+                        <Trash2 className="size-4 text-destructive" />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               );
@@ -210,6 +230,60 @@ export function LeadsTable({ initialLeads }: LeadsTableProps) {
           </Table>
         </div>
       )}
+
+      <Dialog
+        open={!!selectedLead}
+        onOpenChange={(open) => !open && setSelectedLead(null)}
+      >
+        <DialogContent className="sm:max-w-lg">
+          {selectedLead && (
+            <>
+              <DialogHeader>
+                <DialogTitle>Inquiry from {selectedLead.name}</DialogTitle>
+                <DialogDescription>
+                  Submitted{" "}
+                  {format(parseISO(selectedLead.created_at), "MMMM d, yyyy")}
+                </DialogDescription>
+              </DialogHeader>
+              <dl className="grid gap-4 text-sm">
+                <div className="grid gap-1 sm:grid-cols-[120px_1fr]">
+                  <dt className="text-muted-foreground">Email</dt>
+                  <dd>
+                    <a
+                      href={`mailto:${selectedLead.email}`}
+                      className="text-foreground underline-offset-4 hover:underline"
+                    >
+                      {selectedLead.email}
+                    </a>
+                  </dd>
+                </div>
+                <div className="grid gap-1 sm:grid-cols-[120px_1fr]">
+                  <dt className="text-muted-foreground">Service</dt>
+                  <dd>{selectedLead.service}</dd>
+                </div>
+                <div className="grid gap-1 sm:grid-cols-[120px_1fr]">
+                  <dt className="text-muted-foreground">Budget</dt>
+                  <dd>{selectedLead.budget}</dd>
+                </div>
+                <div className="grid gap-1 sm:grid-cols-[120px_1fr]">
+                  <dt className="text-muted-foreground">Score</dt>
+                  <dd>
+                    {getBudgetScore(selectedLead.budget)}/5 ·{" "}
+                    {getLeadScoreLabel(getBudgetScore(selectedLead.budget))}
+                  </dd>
+                </div>
+                <div className="grid gap-2">
+                  <dt className="text-muted-foreground">Message</dt>
+                  <dd className="rounded-lg border border-border bg-muted/30 p-3 whitespace-pre-wrap">
+                    {selectedLead.message}
+                  </dd>
+                </div>
+              </dl>
+              <DialogFooter showCloseButton />
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <DialogContent>
