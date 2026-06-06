@@ -5,10 +5,17 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { AnimatedGrid } from "@/components/shared/AnimatedGrid";
-import { GradientGlow } from "@/components/shared/GradientGlow";
+import { FloatingLinesBackground } from "@/components/shared/FloatingLinesBackground";
 import { PipelineVisualization } from "@/components/shared/PipelineVisualization";
+import TextType from "@/components/TextType";
 import { SITE } from "@/lib/constants/site";
 import { cn } from "@/lib/utils";
+
+const heroTypewriterLines = [
+  SITE.tagline,
+  "Custom websites & CRM systems.",
+  "AI automations that save time.",
+];
 
 export function HeroSection() {
   const prefersReducedMotion = useReducedMotion();
@@ -18,10 +25,13 @@ export function HeroSection() {
       id="home"
       className="relative flex min-h-screen scroll-mt-24 items-center overflow-hidden pt-16"
     >
-      <AnimatedGrid />
-      <GradientGlow className="pointer-events-none absolute inset-0" />
+      {prefersReducedMotion ? (
+        <AnimatedGrid />
+      ) : (
+        <FloatingLinesBackground />
+      )}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60"
         aria-hidden="true"
       />
 
@@ -35,9 +45,24 @@ export function HeroSection() {
             Full-Stack · Automation · SEO
           </p>
 
-          <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            {SITE.tagline}
-          </h1>
+          {prefersReducedMotion ? (
+            <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              {SITE.tagline}
+            </h1>
+          ) : (
+            <TextType
+              as="h1"
+              text={heroTypewriterLines}
+              typingSpeed={75}
+              pauseDuration={1500}
+              deletingSpeed={50}
+              showCursor
+              cursorCharacter="_"
+              cursorBlinkDuration={0.5}
+              className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+              aria-live="polite"
+            />
+          )}
 
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground md:text-xl">
             {SITE.description}
